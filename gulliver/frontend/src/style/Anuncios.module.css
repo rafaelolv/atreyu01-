@@ -1,0 +1,19 @@
+.areaAnuncios{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: lightcyan;
+    border: 2px solid black ;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    height: 400px;  
+    /* Se o height nao expandir sozinho, testo com % */
+}
+
+.anunciosDestaque{
+    border: 2px solid black;
+}
+
+.anunciosSecundarios{
+    border: 2px solid black;
+}

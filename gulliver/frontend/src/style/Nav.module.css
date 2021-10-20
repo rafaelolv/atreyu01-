@@ -1,0 +1,83 @@
+.generalNav{
+    display: flex;
+    flex-basis: 900px;
+    /* border: solid 1px rgb(31, 248, 165); */
+}
+    
+.logo {
+    /* width: 300px; */
+    flex-basis: 300px;
+    margin-right: 10px;
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
+    box-shadow: 2px 2px 4px dimgray;
+    background-color: #DEE2E6; 
+}
+
+.generalNavContainer {
+    display: flex;
+    /* background-color: chocolate; */
+    flex-basis: 900px;
+    /* margin-left: 10px; */
+    align-items: center;
+}
+
+.generalNavContainerUl {
+    display: flex;
+    /* background-color: cadetblue; */
+    flex-basis: 300px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.generalNavContainerUl li {
+    /* background-color: crimson; */
+    flex-basis: 150px;
+    list-style-type: none;
+    border-bottom: solid 1px;
+    border-color: floralwhite;
+    text-align: center;
+    padding: 25px;
+}
+
+.generalNavContainerUl a{
+    /* background-color: aqua; */
+    color: floralwhite;
+}
+
+.navAutenticacao {
+    display: flex;
+    /* border: solid 1px; */
+    /* border-color: chartreuse; */
+    align-self: center;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.buttonLogin{
+    padding: 10px;
+    width: 120px;
+    border-radius: 30px;
+    border: #6434ea solid 2px ;
+    color: #6434ea;
+}
+
+.buttonLogin > span{
+    margin-right: 8px;
+}
+
+.buttonRegister{
+    border-radius: 30px;
+    padding: 10px;
+    margin-left: 10px;
+    width: 120px;
+    background-color: #6434ea;
+    border: floralwhite solid 2px;
+    color: floralwhite;
+}
+
+.buttonRegister span{
+    margin-right: 4px;
+    margin-left: 4px;
+}

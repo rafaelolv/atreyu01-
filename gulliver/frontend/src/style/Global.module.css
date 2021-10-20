@@ -1,0 +1,16 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Bahnschrift Light';
+    /* 'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif; */
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-color: #6172e1;
+    ;  
+    /* 7f99f8 6172e1 4651e1 #4441d6  4361ee              */
+}
