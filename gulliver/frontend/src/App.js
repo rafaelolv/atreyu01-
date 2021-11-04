@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Main from './pages/Main';
 import FormRegistroUsuario from './pages/FormRegistroUsuario';
 import ListUsuario from './pages/ListUsuario';
+import FormLogin from './pages/FormLogin';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -19,6 +20,7 @@ export default props => {
                     <Route exact path={["/", "/inicio"]} component={Main} />
                     <Route exact path="/usuarios" component={FormRegistroUsuario} />
                     <Route exact path="/listagemUsuarios" component={ListUsuario} />
+                    <Route exact path="/login" component={FormLogin} />
                 </Switch>
                 <Footer />
             </React.Fragment>

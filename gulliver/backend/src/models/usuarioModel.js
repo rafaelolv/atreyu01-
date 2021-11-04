@@ -20,20 +20,11 @@ Usuario.create = (newUsuario) => {
     })
 }
 
-// Usuario.findAll = (err, data) => {
-//     sql.query("SELECT * FROM usuario", (err, res) => {
-//         if(err) {
-//             console.log("error: " + err);
-//             return err;
-//         }
-//         console.log("usuárioooo: " + res);
-//         return res;
-//     });
-// }
 
 Usuario.findAll = () => {
     return new Promise ((resolve, reject) => {
         try {
+            console.log("???????????????????")
             sql.query("SELECT * FROM usuario", (err, res)=> {
                 resolve(res);
             })
@@ -41,17 +32,22 @@ Usuario.findAll = () => {
             reject(err);
         }
     })
+}
 
-    // sql.query("SELECT * FROM usuario", (err, res)=> {
-    //     if(err){
-    //         console.log("error: ", err);
-    //         result(null, err);
-    //         return;
-    //     }
-        
-    //     console.log("usuárioooo: ", res);
-    //     result(null, res);
-    // });
+Usuario.findByLoginSenha = (userLogin) => {
+    // posso tentar fazer aqui um select aninhado, o primeiro buscando o id atraves do login e senha passados, se encontrar faz um select trazendo todos os dados
+    // necessarios para colocar na sua página. 
+    return new Promise((resolve, reject) => {
+        const teste = "timao";
+        try {
+            console.log("Ativando a consulta de login!!! " + userLogin.login + " - " + userLogin.senha);
+            sql.query(`SELECT * FROM usuario WHERE login LIKE "${userLogin.login}" AND senha LIKE "${userLogin.senha}"`, (err, res) => {
+                resolve(res[0]);
+            })
+        } catch (err) {
+            reject(err);
+        }
+    })
 }
 
 Usuario.findById = (id_usuario, result) => {

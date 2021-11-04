@@ -14,6 +14,11 @@ class UsuarioService {
         console.log("Chegou aqui 1 createe!");
         return http.post("/usuarios", data);
     }
+
+    login(data) {
+        console.log("Chegou service aqui 1 login!");
+        return http.post("/usuarios/login", data);
+    }
 }
 
 export default new UsuarioService();

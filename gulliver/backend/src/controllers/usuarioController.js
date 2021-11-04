@@ -3,9 +3,6 @@ const { response } = require("express");
 const Usuario = require("../models/usuarioModel.js");
 
 exports.create = (req, res, next) => {
-    console.log("COnteudo req.body ->  " + req.body.nome)
-    // res.json(req.body)
-    console.log("Chegou aqui no controller create 1 !")
     if(!req.body.nome) {
         console.log("ENtrou aqui? controler create")
         res.status(400).send({
@@ -13,7 +10,7 @@ exports.create = (req, res, next) => {
         });
         return;
     }
-    console.log("Chegou aqui no controller create 2 !")
+    console.log("Chegou aqui no controller create 2 ! " + req.body.nome)
     // Create a User
     const usuario = new Usuario({
         nome: req.body.nome,
@@ -42,7 +39,7 @@ exports.findAll = (req, res) => {
         .catch(err => {
             res.status(500).send({
               message:
-                err.message || "Some error occurred while retrieving tutorials."
+                err.message || "Some error occurred while retrieving users."
             });
         });
 
@@ -63,6 +60,34 @@ exports.findAll = (req, res) => {
         //     // return data;
         // }    
 };
+
+exports.login = (req, res, next) => {
+    console.log("Chegou aqui login controller " + req.body.login + " - " + req.body.senha)
+    if(!req.body.login || !req.body.senha) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
+    // const user = {req.body.login, req.body.senha};
+
+    const userLogin = new Usuario({
+        login: req.body.login,
+        senha: req.body.senha
+    });
+
+    Usuario.findByLoginSenha(userLogin)
+        .then(data => {
+            console.log("data do constroller " + data.nome)
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+            message:
+                err.message || "Some error occurred while retrieving user."
+            });
+        });
+}
 
 exports.findOne = (req, res) => {
     Usuario.findById(req.params.userId, (err, data) => {

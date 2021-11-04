@@ -7,5 +7,7 @@ module.exports = app => {
 
     router.get("/", usuarioController.findAll);
 
+    router.post("/login", usuarioController.login);
+
     app.use('/guliver/usuarios', router);
 };  

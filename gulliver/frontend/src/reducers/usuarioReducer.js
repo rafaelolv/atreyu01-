@@ -1,18 +1,19 @@
-import { CREATE_USUARIO, LIST_USUARIO } from "../actions/actionTypes/usuarioActionTypes";
+import { CREATE_USUARIO, LIST_USUARIO, GET_USER } from "../actions/actionTypes/usuarioActionTypes";
 
 const initialState = {
-    usuarios: []
+    usuarios: [],
+    usuario: null
 };
 
 function usuarioReducer(state = initialState, action) {
 
-    console.log("Chegou 5 reduceeeeeer!, action " + action.payload);
+    console.log("Chegou 5 reduceeeeeer!, action payload" + action.payload);
     
     // console.log("Chegou 5.4 reduceeeeeer!, action " + action.payload.usuarios);
     console.log("Chegou 5.5 reduceeeeeer!, action.type " + action.type);
 
-    const usuarios = action.payload;
-    console.log("Chegou 5.6 reducer!, action " + usuarios)
+    const usuario = action.payload;
+    console.log("Chegou 5.6 reducer!, action " + usuario)
 
     // usuarios.forEach(element => {
     //     console.log("E ai??? " + element)
@@ -32,6 +33,12 @@ function usuarioReducer(state = initialState, action) {
                 ...state,
                 usuarios: [...action.payload]
                 // ...state, list: action.payload.data "como esta lá no udemy, testar amanha (03/10) aula 177"
+            }
+
+        case GET_USER:
+            return {
+                ...state,
+                usuario: action.payload
             }
 
         default:

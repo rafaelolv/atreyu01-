@@ -1,4 +1,4 @@
-import { CREATE_USUARIO, LIST_USUARIO } from "./actionTypes/usuarioActionTypes";
+import { CREATE_USUARIO, LIST_USUARIO, GET_USER } from "./actionTypes/usuarioActionTypes";
 import Usuarioservice from "../services/usuarioService";
 
 export const createUsuario = (nome, cpf, login, senha) => async (dispatch) => {
@@ -9,7 +9,7 @@ export const createUsuario = (nome, cpf, login, senha) => async (dispatch) => {
 
         const res = await Usuarioservice.create({ nome, cpf, login, senha });
 
-        console.log("action creacteUsuario Chegou aqui!")
+        console.log("action creacteUsuario Chegou aqui! " + res.data)
         
         dispatch({
             type: CREATE_USUARIO,
@@ -41,7 +41,24 @@ export const retrieveUsuarios = () => async (dispatch) => {
     // return [...res];
 }
 
+export const logarUsuario = (login, senha) => async (dispatch) => {
+    try{
+        console.log("logarUsuario " + login);
+        const res = await Usuarioservice.login({ login, senha });
+        console.log("---action do usuário logado::::: " + res.data);
 
+        // let usuarios = res.data;
+        // usuarios.map(usuario => console.log("Nome: " + usuario.nome +  ": " + usuario.id_usuario))
+
+        dispatch({
+            type: GET_USER,
+            payload: res.data,
+          });
+
+    }catch (err) {
+        console.log(err);
+    }
+}
 
 // retrieveUsuarios()
 //     .then(usuarios => usuarios.map(usuario => usuario.nome))

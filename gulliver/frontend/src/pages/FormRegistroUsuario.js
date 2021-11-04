@@ -26,81 +26,59 @@ class FormRegistroUsuario extends Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onChangeNome = this.onChangeNome.bind(this);
-        this.onChangeCpf = this.onChangeCpf.bind(this);
-        this.onChangeLogin = this.onChangeLogin.bind(this);
-        this.onChangeSenha = this.onChangeSenha.bind(this);
+        this.handlerChange = this.handlerChange.bind(this);
+        // this.onChangeNome = this.onChangeNome.bind(this);
+        // this.onChangeCpf = this.onChangeCpf.bind(this);
+        // this.onChangeLogin = this.onChangeLogin.bind(this);
+        // this.onChangeSenha = this.onChangeSenha.bind(this);
 
     }
 
-    onChangeNome(e) {
-        this.setState({
-            nome: e.target.value,
-        });
-    }
-
-    onChangeCpf(e) {
-        this.setState({
-            cpf: e.target.value,
-        });
-    }
-
-    onChangeLogin(e) {
-        this.setState({
-            login: e.target.value,
-        });
-    }
-
-    onChangeSenha(e) {
-        this.setState({
-            senha: e.target.value,
-        });
-    }
-
-    handleSubmit() {
-        const { nome, cpf, login, senha } = this.state;
-
-        this.props
-            .createUsuario(nome, cpf, login, senha)
-            .then((data) => {
-                this.setState({
-                    id: data.id,
-                    nome: data.nome,
-                    cpf: data.cpf,
-                    login: data.login,
-                    senha: data.senha,
-
-                });
-                console.log(data);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }
+    // ***O uso aqui do the seria caso eu quisesse setar o valor  recebido da requisição/promisse e setar no estado desse componente, para poder exibi-lo 
+    // nessa tela.
 
     // handleSubmit() {
-    //     // event.preventDefault();
-    //     // this.state.id_usuario = uuidv1();
-    //     let { nome } = this.state;
-    //     console.log("STATE " + nome)
-    //     this.props.createUsuario(this.state);
-        
-    //     this.setState({
-    //         id_usuario: '',
-    //         nome: '',
-    //         cpf: '',
-    //         login: '',
-    //         senha: '',
-    //     });
-    // }  
+    //     const { nome, cpf, login, senha } = this.state;
 
-    // handlerChange(event) {
-    //     console.log("ID:   " + event.target.id)
-    //     console.log("ID:   " + event.target.value)
-    //     this.setState({
-    //         [event.target.id]: event.target.value
-    //     });
+    //     this.props
+    //         .createUsuario(nome, cpf, login, senha)
+    //         .then((data) => {
+    //             this.setState({
+    //                 id: data.id,    ***O uso aqui do the seria caso eu quisesse setar o valor  recebido da requisição/promisse e setar no estado desse componente, para poder exibi-lo 
+    //                 nome: data.nome,       nessa tela.
+    //                 cpf: data.cpf,
+    //                 login: data.login,
+    //                 senha: data.senha,
+
+    //             });
+    //             console.log(data);
+    //         })
+    //         .catch((e) => {
+    //             console.log(e);
+    //         });
     // }
+
+    handleSubmit() {
+        // event.preventDefault();
+        // this.state.id_usuario = uuidv1();
+      
+        const { nome, cpf, login, senha } = this.state;
+        this.props.createUsuario(nome, cpf, login, senha);
+        
+        this.setState({
+            id_usuario: '',
+            nome: '',
+            cpf: '',
+            login: '',
+            senha: '',
+        });
+    }  
+
+    handlerChange(event) {
+        this.setState({
+            [event.target.id]: event.target.value
+        });
+    }
 
     render() {
         return(
@@ -108,40 +86,35 @@ class FormRegistroUsuario extends Component {
                 <h1>
                     Cadastre-se
                 </h1>
-                {/* <form onSubmit={this.handleSubmit}> */}
-                <div>
+                <form>
                     <div>
                         <label htmlFor="nome">
                             Nome
                         </label>
-                        <input type="text" id="nome" value={this.state.nome} onChange={this.onChangeNome} placeholder='Nome' name="nome" />
+                        <input type="text" id="nome" value={this.state.nome} onChange={this.handlerChange} placeholder='Nome' name="nome" />
                     </div>
                     <div>
                         <label htmlFor="cpf">
                             CPF
                         </label>
-                        <input type="text" id="cpf" value={this.state.cpf} onChange={this.onChangeCpf} name="cpf"/>
+                        <input type="text" id="cpf" value={this.state.cpf} onChange={this.handlerChange} name="cpf"/>
                     </div>
                     <div>
                         <label htmlFor="login">
                             Login
                         </label>
-                        <input type="text" id="login" value={this.state.login} onChange={this.onChangeLogin} name="login" />
+                        <input type="text" id="login" value={this.state.login} onChange={this.handlerChange} name="login" />
                     </div>
                     <div>
                         <label htmlFor="senha">
                             Senha
                         </label>
-                        <input type="text" id="senha" value={this.state.senha} onChange={this.onChangeSenha} name="senha"/>
+                        <input type="text" id="senha" value={this.state.senha} onChange={this.handlerChange} name="senha"/>
                     </div>
-                    {/* <div>
-                        <input type="submit" name="Cadastrar"/>
-                    </div> */}
-                {/* </form> */}
-                    <button type="submit" onClick={this.handleSubmit} >
-                        Submit
-                    </button>
-                </div>
+                </form>
+                <button type="submit" onClick={this.handleSubmit} >
+                    Cadastrar
+                </button>
             </Fragment>
         )
     }
