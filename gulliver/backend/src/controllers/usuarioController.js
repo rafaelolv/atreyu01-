@@ -10,13 +10,14 @@ exports.create = (req, res, next) => {
         });
         return;
     }
-    console.log("Chegou aqui no controller create 2 ! " + req.body.nome)
+    console.log("Chegou aqui no controller create 2 ! " + " " + req.body.usuarioFoto + " " + req.body.nome);
     // Create a User
     const usuario = new Usuario({
         nome: req.body.nome,
         cpf: req.body.cpf,
         login: req.body.login,
-        senha: req.body.senha
+        senha: req.body.senha,
+        usuario_foto: req.body.usuarioFoto
     });
 
     Usuario.create(usuario)

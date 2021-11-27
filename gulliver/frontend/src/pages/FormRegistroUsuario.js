@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+
 import { createUsuario } from '../actions/usuarioActions';
+import InputImage from './../components/form/InputImage';
 // import uuidv1 from 'uuidv1';
+
+import {Link} from 'react-router-dom';
 
 // const mapDispatchToProps = dispatch => {
 //     return {
@@ -23,15 +27,12 @@ class FormRegistroUsuario extends Component {
             cpf: '',
             login: '',
             senha: '',
+            usuarioFoto: null,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handlerChange = this.handlerChange.bind(this);
-        // this.onChangeNome = this.onChangeNome.bind(this);
-        // this.onChangeCpf = this.onChangeCpf.bind(this);
-        // this.onChangeLogin = this.onChangeLogin.bind(this);
-        // this.onChangeSenha = this.onChangeSenha.bind(this);
-
+        this.handlerChangeImage = this.handlerChangeImage.bind(this);
     }
 
     // ***O uso aqui do the seria caso eu quisesse setar o valor  recebido da requisição/promisse e setar no estado desse componente, para poder exibi-lo 
@@ -62,8 +63,8 @@ class FormRegistroUsuario extends Component {
         // event.preventDefault();
         // this.state.id_usuario = uuidv1();
       
-        const { nome, cpf, login, senha } = this.state;
-        this.props.createUsuario(nome, cpf, login, senha);
+        const { nome, cpf, login, senha, usuarioFoto } = this.state;
+        this.props.createUsuario(nome, cpf, login, senha, usuarioFoto);
         
         this.setState({
             id_usuario: '',
@@ -71,12 +72,19 @@ class FormRegistroUsuario extends Component {
             cpf: '',
             login: '',
             senha: '',
+            usuarioFoto: null,
         });
     }  
 
     handlerChange(event) {
         this.setState({
             [event.target.id]: event.target.value
+        });
+    }
+
+    handlerChangeImage(event, image) {
+        this.setState({
+            [event.target.id]: image
         });
     }
 
@@ -111,10 +119,19 @@ class FormRegistroUsuario extends Component {
                         </label>
                         <input type="text" id="senha" value={this.state.senha} onChange={this.handlerChange} name="senha"/>
                     </div>
+                    <InputImage handlerChangeImage={this.handlerChangeImage} />
                 </form>
                 <button type="submit" onClick={this.handleSubmit} >
                     Cadastrar
+                </button> <br/> <br/>
+
+                <Link to={'/testeImagem'}>
+                <button>
+                    <span>Teste de IMmagem</span> 
+                    
                 </button>
+            </Link>
+
             </Fragment>
         )
     }

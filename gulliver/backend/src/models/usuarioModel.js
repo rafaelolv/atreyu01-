@@ -6,11 +6,13 @@ const Usuario = function(usuario) {
     this.cpf = usuario.cpf;
     this.login = usuario.login;
     this.senha = usuario.senha;
+    this.usuario_foto = usuario.usuario_foto;
   };
 
 Usuario.create = (newUsuario) => {
     return new Promise ((resolve, reject) => {
         try {
+            console.log("Tentando inserir imagem!!!!!");
             sql.query("INSERT INTO usuario SET ?", newUsuario, (err, res) => {
                 resolve(res);
             })
@@ -24,7 +26,7 @@ Usuario.create = (newUsuario) => {
 Usuario.findAll = () => {
     return new Promise ((resolve, reject) => {
         try {
-            console.log("???????????????????")
+            console.log("???????????????????");
             sql.query("SELECT * FROM usuario", (err, res)=> {
                 resolve(res);
             })

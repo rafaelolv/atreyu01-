@@ -12,10 +12,10 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
-app.use(express.json()); /* bodyParser.json() is deprecated */
+app.use(express.json({limit: '50mb'})); /* bodyParser.json() is deprecated */
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true })); /* bodyParser.urlencoded() is deprecated */
+app.use(express.urlencoded({ limit: '50mb', extended: true })); /* bodyParser.urlencoded() is deprecated */
 
 require("../routers/usuarioRoutes")(app); //passando app para a função que esta nesse caminho
 

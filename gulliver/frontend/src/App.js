@@ -7,6 +7,8 @@ import FormRegistroUsuario from './pages/FormRegistroUsuario';
 import ListUsuario from './pages/ListUsuario';
 import FormLogin from './pages/FormLogin';
 
+import TesteImagem from './pages/TesteImagem';
+
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import './style/Global.module.css';
@@ -21,6 +23,9 @@ export default props => {
                     <Route exact path="/usuarios" component={FormRegistroUsuario} />
                     <Route exact path="/listagemUsuarios" component={ListUsuario} />
                     <Route exact path="/login" component={FormLogin} />
+
+                    <Route exact path="/testeImagem" component={TesteImagem} />
+
                 </Switch>
                 <Footer />
             </React.Fragment>
