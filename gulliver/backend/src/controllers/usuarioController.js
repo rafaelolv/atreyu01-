@@ -1,6 +1,7 @@
 const { json } = require("body-parser");
 const { response } = require("express");
-const Usuario = require("../models/usuarioModel.js");
+const Pessoa = require("../models/usuarioModel.js");
+const PessoaFactory = require("../models/pessoaFactory/pessoaFactory.js");
 
 exports.create = (req, res, next) => {
     if(!req.body.nome) {
@@ -10,17 +11,35 @@ exports.create = (req, res, next) => {
         });
         return;
     }
-    console.log("Chegou aqui no controller create 2 ! " + " " + req.body.usuarioFoto + " " + req.body.nome);
-    // Create a User
-    const usuario = new Usuario({
-        nome: req.body.nome,
-        cpf: req.body.cpf,
-        login: req.body.login,
-        senha: req.body.senha,
-        usuario_foto: req.body.usuarioFoto
-    });
+    //Posso mandar o req para uma classe contrutora atraves de um metodo implementado nela e chamado aqui, e lá ela instancia uma 
+    //classe pessoa correta com os dados usados no cadastro, e retorna um objeto literal para ser usado nesse create. 
+    //Acho que vai ter que ter uma classe generica com as diferentes classes pessoas.
 
-    Usuario.create(usuario)
+    const pessoaFactory = new PessoaFactory();
+    const pessoa = pessoaFactory.createPessoa(req)
+    
+    // Create a User
+    // const pessoa = new Pessoa({
+    //     nome: req.body.nome,
+    //     sobrenome: req.body.sobrenome,
+    //     dadosAcesso: {
+    //         id_pessoa: null,
+    //         login: req.body.dadosAcesso.login,
+    //         senha: req.body.dadosAcesso.senha
+    //     }
+    // });
+
+    // const pessoaTeste = {
+    //     nome: req.body.nome,
+    //     sobrenome: req.body.sobrenome,
+    //     dadosAcesso: {
+    //         id_pessoa: null,
+    //         login: req.body.dadosAcesso.login,
+    //         senha: req.body.dadosAcesso.senha
+    //     }
+    // }
+    
+    Pessoa.create(pessoa)
         .then(data => {
             res.send(data);
         })

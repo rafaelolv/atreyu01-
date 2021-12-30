@@ -35,7 +35,7 @@ class FormRegistroUsuario extends Component {
         this.handlerChangeImage = this.handlerChangeImage.bind(this);
     }
 
-    // ***O uso aqui do the seria caso eu quisesse setar o valor  recebido da requisição/promisse e setar no estado desse componente, para poder exibi-lo 
+    // ***O uso aqui do then seria caso eu quisesse setar o valor  recebido da requisição/promisse e setar no estado desse componente, para poder exibi-lo 
     // nessa tela.
 
     // handleSubmit() {
@@ -126,11 +126,11 @@ class FormRegistroUsuario extends Component {
                 </button> <br/> <br/>
 
                 <Link to={'/testeImagem'}>
-                <button>
-                    <span>Teste de IMmagem</span> 
-                    
-                </button>
-            </Link>
+                    <button>
+                        <span>Teste de IMmagem</span> 
+                        
+                    </button>
+                </Link>
 
             </Fragment>
         )

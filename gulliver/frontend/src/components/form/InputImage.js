@@ -28,9 +28,9 @@ const InputImage = ({handlerChangeImage}) => {
             </label><br/>
             <input 
                 type="file"
-                id="usuarioFoto"
+                id="imagem"
                 label="Image"
-                name="usuarioFoto"
+                name="imagem"
                 accept=".jpeg, .png, .jpg"
                 onChange={(event) => handlerFileUpload(event)}
             />

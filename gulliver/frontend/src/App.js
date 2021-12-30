@@ -3,7 +3,7 @@ import React from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Main from './pages/Main';
-import FormRegistroUsuario from './pages/FormRegistroUsuario';
+import FormRegistroPessoa from './pages/FormRegistroPessoa';
 import ListUsuario from './pages/ListUsuario';
 import FormLogin from './pages/FormLogin';
 
@@ -20,7 +20,7 @@ export default props => {
                 <Header />
                 <Switch>
                     <Route exact path={["/", "/inicio"]} component={Main} />
-                    <Route exact path="/usuarios" component={FormRegistroUsuario} />
+                    <Route exact path="/usuarios" component={FormRegistroPessoa} />
                     <Route exact path="/listagemUsuarios" component={ListUsuario} />
                     <Route exact path="/login" component={FormLogin} />
 

@@ -1,29 +1,50 @@
 const sql = require("../config/db.js");
 
-// constructor
-const Usuario = function(usuario) {
-    this.nome = usuario.nome;
-    this.cpf = usuario.cpf;
-    this.login = usuario.login;
-    this.senha = usuario.senha;
-    this.usuario_foto = usuario.usuario_foto;
-  };
+constructor
+const Pessoa = function(pessoa) {
+    this.nome = pessoa.nome;
+    this.sobrenome = pessoa.sobrenome;
+    this.dadosAcesso = pessoa.dadosAcesso;
+    this.dadosRegistroFuncionario = pessoa.dadosRegistroFuncionario;
+};
 
-Usuario.create = (newUsuario) => {
-    return new Promise ((resolve, reject) => {
+Pessoa.create = (newPessoa) => {
+    return new Promise (async (resolve, reject) => {
         try {
-            console.log("Tentando inserir imagem!!!!!");
-            sql.query("INSERT INTO usuario SET ?", newUsuario, (err, res) => {
-                resolve(res);
-            })
+            const queryPessoa = 'INSERT INTO pessoa SET ?';
+            
+            const {nome, sobrenome} = newPessoa;
+            const resultPessoa = await executeQuery(sql, queryPessoa, {nome, sobrenome});
+            console.log("-----------id_pessoa " + resultPessoa.insertId);
+
+            const queryDadosAcesso = 'INSERT INTO dados_acesso SET ?';
+            const pessoaDadosAcesso = {...newPessoa.dadosAcesso, id_pessoa: resultPessoa.insertId};
+            const dadosAcesso = await executeQuery(sql, queryDadosAcesso, pessoaDadosAcesso);
+
+            const queryRegistroFuncionario = 'INSERT INTO funcionario SET ?';
+            const dadosFuncionario = {...newPessoa.dadosRegistroFuncionario, id_pessoa: resultPessoa.insertId};
+            const funcionario = await executeQuery(sql, queryRegistroFuncionario, dadosFuncionario);
         } catch (err) {
-            reject(err);
+            throw err;
         }
-    })
+    });
+
+    // sql.query("INSERT INTO usuario SET ?", newUsuario, (err, res) => {
+}
+
+const executeQuery = async (con, query, params) => {
+    return new Promise ((resolve, reject) => {
+        con.query(query, params, (err, res) => {
+            if(err) {
+                return reject(err);
+            }
+            return resolve(res);
+        });
+    });
 }
 
 
-Usuario.findAll = () => {
+Pessoa.findAll = () => {
     return new Promise ((resolve, reject) => {
         try {
             console.log("???????????????????");
@@ -36,7 +57,7 @@ Usuario.findAll = () => {
     })
 }
 
-Usuario.findByLoginSenha = (userLogin) => {
+Pessoa.findByLoginSenha = (userLogin) => {
     // posso tentar fazer aqui um select aninhado, o primeiro buscando o id atraves do login e senha passados, se encontrar faz um select trazendo todos os dados
     // necessarios para colocar na sua página. 
     return new Promise((resolve, reject) => {
@@ -52,7 +73,7 @@ Usuario.findByLoginSenha = (userLogin) => {
     })
 }
 
-Usuario.findById = (id_usuario, result) => {
+Pessoa.findById = (id_usuario, result) => {
     sql.query(`SELECT * FROM usuario WHERE id_usuario = ${id_usuario}`, (err, res) => {
         if(err){
             console.log("error: ", err);
@@ -71,4 +92,4 @@ Usuario.findById = (id_usuario, result) => {
     });
 }
 
-module.exports = Usuario;
+module.exports = Pessoa;
