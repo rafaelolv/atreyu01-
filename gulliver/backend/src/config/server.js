@@ -18,6 +18,7 @@ app.use(express.json({limit: '50mb'})); /* bodyParser.json() is deprecated */
 app.use(express.urlencoded({ limit: '50mb', extended: true })); /* bodyParser.urlencoded() is deprecated */
 
 require("../routers/usuarioRoutes")(app); //passando app para a função que esta nesse caminho
+require("../routers/agenciaRoutes")(app);
 
 // app.use("/cadastrousuario", UsuarioRoutes);
 

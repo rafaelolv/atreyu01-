@@ -1,17 +1,36 @@
-import { ADD_AGENCIA } from "../actions/actionTypes/agenciaActionTypes";
+import { CREATE_AGENCIA, GET_AGENCIA, LIST_AGENCIA } from "../actions/actionTypes/agenciaActionTypes";
 
 const initialState = {
-    agencias: []
+    agencias: [],
+    agencia: null
 };
 
 function agenciaReducer(state = initialState, action) {
-    if(action.type === ADD_AGENCIA) {
-        return {
-            ...state,
-            agencias: [...state.agencias, action.payload]
-        }
+    switch (action.type) {
+        case CREATE_AGENCIA:
+            return {
+                ...state,
+                agencias: [...state.agencias, action.payload]
+            }
+            // return [...state, payload];
+
+        case LIST_AGENCIA:
+            console.log("Chegou 6! reducer");
+            return {
+                ...state,
+                agencias: [...action.payload]
+                // ...state, list: action.payload.data "como esta lá no udemy, testar amanha (03/10) aula 177"
+            }
+
+        case GET_AGENCIA:
+            return {
+                ...state,
+                agencia: action.payload
+            }
+
+        default:
+            return state;
     }
-    return state;
 };
 
 export default agenciaReducer;

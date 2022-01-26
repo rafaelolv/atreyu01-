@@ -1,13 +1,12 @@
 import React, { Component, Fragment } from 'react';
 
-
 class FormRegistroFuncionario extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             id_funcionario: null,
-            id_pessoa: '',
+            id_pessoa: null,
             data_admissao: '',
             // papel: '',
             salario: '',
@@ -20,8 +19,10 @@ class FormRegistroFuncionario extends Component {
         this.setState({
             [event.target.id]: event.target.value
         })
-    
-        this.props.handleChangeChild(this.state);
+        
+        if(event.target.id === "salario"){
+            this.props.handleChangeChild(this.state);
+        }
     }
 
     render() {

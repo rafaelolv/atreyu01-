@@ -39,7 +39,7 @@ class ListUsuario extends Component {
                     <ul>
                        {usuarios && usuarios.map(usuario => ( 
                        <li key={usuario.id_usuario}>
-                            {usuario.nome} {usuario.cpf} {usuario.id_usuario}
+                            {usuario.nome} {usuario.cpf} {usuario.id_pessoa}
                        </li>
                     ))}
                     </ul>

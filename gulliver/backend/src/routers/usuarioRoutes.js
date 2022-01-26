@@ -9,5 +9,5 @@ module.exports = app => {
 
     router.post("/login", usuarioController.login);
 
-    app.use('/guliver/usuarios', router);
+    app.use('/gulliver/usuarios', router);
 };  

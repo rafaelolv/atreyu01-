@@ -1,66 +1,81 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import FormAgencia from './FormAgencia';
+import FormRegistroPessoa from './FormRegistroPessoa';
 
-import InputImage from '../components/form/InputImage';
+import { createAgencia } from './../actions/agenciaActions';
+import InputsDadosPessoa from '../components/form/formPessoa/InputsDadosPessoa';
+import FormDadosAcesso from './FormDadosAcesso';
+import FormRegistroFuncionario from './FormRegistroFuncionario';
+
 
 class FormRegistroAgencia extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-           id_agencia: null,
-           id_funcionario: null,
-           nome: '',
-           cnpj: '',
-           cor: '',
-           logo: '',
+            changeForm: true,
+            pessoa: null,
+            agencia: null,
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handlerChangeImage = this.handlerChangeImage.bind(this);
+        this.handleStepPessoa = this.handleStepPessoa.bind(this);
+        this.handleStepAgencia = this.handleStepAgencia.bind(this);
+        this.nextStep = this.nextStep.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handlerChange(event) {
+    handleStepPessoa(newPessoa) {
         this.setState({
-            [event.target.id]: event.target.value
+            pessoa: newPessoa
         });
     }
 
-    handlerChangeImage(event, image) {
+    handleStepAgencia(newAgencia) {
         this.setState({
-            [event.target.id]: image
+            agencia: newAgencia
         });
+    }
+
+    nextStep() {
+        this.setState({
+            changeForm: false
+        });
+    }
+
+    handleSubmit() {
+        var data = {
+            pessoa: this.state.pessoa,
+            agencia: this.state.agencia,
+        };
+        
+        this.props.createAgencia(data);
     }
 
     render() {
         return(
-            <Fragment>
-                <form>
-                    <div>
-                        <label>Nome</label>
-                        <input type="text" id="nome" value={this.state.nome} onChange={this.handlerChange} placeholder='Nome' name="nome" />
-                    </div>
-                    <div>
-                        <label>CNPJ</label>
-                        <input type="text" id="cnpj" value={this.state.nome} onChange={this.handlerChange} placeholder='CNPJ' name="cnpj" />
-                    </div>
-                    <div>
-                        <label>Cor</label>
-                        <input type="text" id="cor" value={this.state.nome} onChange={this.handlerChange} placeholder='Cor' name="cor" />
-                    </div>
-                    <div>
-                        <label>Logo</label>
-                        <input type="text" id="logo" value={this.state.nome} onChange={this.handlerChange} placeholder='Logo' name="logo" />
-                    </div>
-
-                    <InputImage handlerChangeImage={this.handlerChangeImage} />
-                </form>
-                <button type="submit" onClick={this.handleSubmit} >
-                    Cadastrar
+           <Fragment>
+               <h1>Cadastro de agência</h1>
+               <form>
+                    {this.state.changeForm ? (
+                        <Fragment>
+                            <InputsDadosPessoa handleChangeChild={this.handleStepPessoa} />
+                        </Fragment>
+                    ) : (
+                        <Fragment>
+                            <FormAgencia callBackStepAgencia={this.handleStepAgencia} />
+                        </Fragment>
+                    )}
+               </form>
+               <button onClick={this.nextStep} >
+                    Próximo passo
                 </button>
-            </Fragment>
+               <button type="submit" onClick={this.handleSubmit} >
+                    Cadastrar agência
+               </button>
+           </Fragment> 
         )
     }
 }
 
-export default FormRegistroAgencia;
+export default connect(null, { createAgencia })(FormRegistroAgencia);

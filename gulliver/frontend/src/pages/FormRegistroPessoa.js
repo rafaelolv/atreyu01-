@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import { createUsuario } from '../actions/usuarioActions';
 
@@ -23,28 +24,51 @@ class FormRegistroPessoa extends Component {
         this.handleChangeRegistroFuncionario = this.handleChangeRegistroFuncionario.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    
 
     handleSubmit() {
+
+        var data = {
+            id_pessoa: '',
+            nome: this.state.nome,
+            sobrenome: this.state.sobrenome,
+            dadosRegistroFuncionario: this.state.dadosRegistroFuncionario,
+            dadosAcesso: this.state.dadosAcesso,
+        };
+
         // event.preventDefault();
         // this.state.id_usuario = uuidv1();
       
-        const { nome, sobrenome, dadosRegistroFuncionario, dadosAcesso} = this.state;
-        this.props.createUsuario(nome, sobrenome, dadosRegistroFuncionario, dadosAcesso);
+        // const { nome, sobrenome, dadosRegistroFuncionario, dadosAcesso} = this.state;
+        // console.log("desestruturado  --- " + nome + dadosRegistroFuncionario)
+        this.props.createUsuario(data)
+                .then((response) => {
+                    this.setState({
+                        id_pessoa: response.data.id_pessoa,
+                        nome: response.data.nome,
+                        sobrenome: response.data.sobrenome,
+                        dadosRegistroFuncionario: response.data.dadosRegistroFuncionario,
+                        dadosAcesso: response.data.dadosAcesso,
+                    });
+                })
+                .catch((e) => {
+                    console.log("Erro no handlerSubmit pessoa " + e)
+                });
         
-        this.setState({
-            id_pessoa: '',
-            nome: '',
-            sobrenome: '',
-            dadosRegistroFuncionario: {
-                data_admissao: '',
-                // papel: '',
-                salario:'',
-            },
-            dadosAcesso: {
-                login: '',
-                senha:'',
-            },
-        });
+        // this.setState({
+        //     id_pessoa: '',
+        //     nome: '',
+        //     sobrenome: '',
+        //     dadosRegistroFuncionario: {
+        //         data_admissao: '',
+        //         // papel: '',
+        //         salario:'',
+        //     },
+        //     dadosAcesso: {
+        //         login: '',
+        //         senha:'',
+        //     },
+        // });
     }  
 
     handleChange(event) {
@@ -79,15 +103,21 @@ class FormRegistroPessoa extends Component {
                         <input type="text" id="sobrenome" value={this.state.sobrenome} onChange={this.handleChange} placeholder='Sobrenome' name="sobrenome" />
                     </div>
 
-                    <FormRegistroFuncionario handleChangeChild={this.handleChangeRegistroFuncionario} />
+                    <FormRegistroFuncionario handleChangeChild={this.handleChangeRegistroFuncionario}/>
                     <FormDadosAcesso handleChangeChild={this.handleChangeDadosAcesso} />
                 </form>
                 <button type="submit" onClick={this.handleSubmit} >
                     Cadastrar
                 </button>
+
+                <Link to={"/cadastroAgencia"}>
+                    <button>
+                        Cadastrar agência
+                    </button>
+                </Link>
             </Fragment>
         )
     }
 }
 
-export default connect(null, { createUsuario })(FormRegistroPessoa); ;
+export default connect(null, { createUsuario })(FormRegistroPessoa);

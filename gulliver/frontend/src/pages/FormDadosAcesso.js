@@ -17,8 +17,9 @@ class FormDadosAcesso extends Component {
         this.setState({
             [event.target.id]: event.target.value
         })
-    
-        this.props.handleChangeChild(this.state);
+        if(event.target.id === "senha"){
+            this.props.handleChangeChild(this.state);
+        }
     }
 
     render() {

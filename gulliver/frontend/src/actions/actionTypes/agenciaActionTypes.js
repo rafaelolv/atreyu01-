@@ -1,1 +1,3 @@
-export const ADD_AGENCIA = 'ADD_AGENCIA';
+export const CREATE_AGENCIA = 'CREATE_AGENCIA';
+export const LIST_AGENCIA = 'LIST_AGENCIA';
+export const GET_AGENCIA = 'GET_AGENCIA';

@@ -5,7 +5,7 @@ const PessoaFactory = require("../models/pessoaFactory/pessoaFactory.js");
 
 exports.create = (req, res, next) => {
     if(!req.body.nome) {
-        console.log("ENtrou aqui? controler create")
+        console.log("ENtrou aqui? controler create teste" + req.body.nome)
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -38,9 +38,11 @@ exports.create = (req, res, next) => {
     //         senha: req.body.dadosAcesso.senha
     //     }
     // }
+    console.log("1 - pessoa do controller " + pessoa.nome + " - " + Object.values(pessoa));
     
     Pessoa.create(pessoa)
         .then(data => {
+            // console.log(Object.values(data));
             res.send(data);
         })
         .catch(err => {
@@ -52,7 +54,7 @@ exports.create = (req, res, next) => {
 };
 
 exports.findAll = (req, res) => {
-    Usuario.findAll()
+    Pessoa.findAll()
         .then(data => {
             res.send(data);
         })
@@ -96,7 +98,7 @@ exports.login = (req, res, next) => {
         senha: req.body.senha
     });
 
-    Usuario.findByLoginSenha(userLogin)
+    Pessoa.findByLoginSenha(userLogin)
         .then(data => {
             console.log("data do constroller " + data.nome)
             res.send(data);
@@ -110,7 +112,7 @@ exports.login = (req, res, next) => {
 }
 
 exports.findOne = (req, res) => {
-    Usuario.findById(req.params.userId, (err, data) => {
+    Pessoa.findById(req.params.userId, (err, data) => {
         if(err){
             if(err.kind === "not_found"){
                 res.status(400).send({

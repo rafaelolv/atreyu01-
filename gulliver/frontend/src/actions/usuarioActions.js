@@ -1,22 +1,17 @@
 import { CREATE_USUARIO, LIST_USUARIO, GET_USER } from "./actionTypes/usuarioActionTypes";
 import Usuarioservice from "../services/usuarioService";
 
-export const createUsuario = (nome, sobrenome, dadosRegistroFuncionario, dadosAcesso) => async (dispatch) => {
+export const createUsuario = (data) => async (dispatch) => {
     try {
-        // let { nome, cpf, login, senha } = usuario;
-        // console.log("action create usuario: " + nome);
-        // console.log("action create usuario: " + cpf);
         
-        const res = await Usuarioservice.create({ nome, sobrenome, dadosRegistroFuncionario, dadosAcesso });
-
-        console.log("action creacteUsuario Chegou aqui! " + res.data)
+        const res = await Usuarioservice.create(data);
         
         dispatch({
             type: CREATE_USUARIO,
             payload: res.data
         });
 
-        return Promise.resolve(res.data);
+        return Promise.resolve(res);
     } catch(err) {
         return Promise.reject(err);
     }

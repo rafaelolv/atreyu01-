@@ -7,18 +7,6 @@ const initialState = {
 
 function usuarioReducer(state = initialState, action) {
 
-    console.log("Chegou 5 reduceeeeeer!, action payload" + action.payload);
-    
-    // console.log("Chegou 5.4 reduceeeeeer!, action " + action.payload.usuarios);
-    console.log("Chegou 5.5 reduceeeeeer!, action.type " + action.type);
-
-    const usuario = action.payload;
-    console.log("Chegou 5.6 reducer!, action " + usuario)
-
-    // usuarios.forEach(element => {
-    //     console.log("E ai??? " + element)
-    // });
-
     switch (action.type) {
         case CREATE_USUARIO:
             return {

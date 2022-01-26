@@ -13,8 +13,11 @@ const GeneralNavContainer = () => {
                     </Link>
                 </li>
                 <li>
-                    <a>Agências</a>
+                    <Link to={"/cadastroAgencia"}>
+                        <a>Cadastro</a>
+                    </Link>
                 </li>
+                
                 <li>
                     <a>Promoções</a>
                 </li>

@@ -3,9 +3,12 @@ import React from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Main from './pages/Main';
+
 import FormRegistroPessoa from './pages/FormRegistroPessoa';
 import ListUsuario from './pages/ListUsuario';
 import FormLogin from './pages/FormLogin';
+
+import FormRegistroAgencia from './pages/FormRegistroAgencia';
 
 import TesteImagem from './pages/TesteImagem';
 
@@ -20,9 +23,11 @@ export default props => {
                 <Header />
                 <Switch>
                     <Route exact path={["/", "/inicio"]} component={Main} />
+                    <Route exact path="/cadastroAgencia" component={FormRegistroAgencia} />
                     <Route exact path="/usuarios" component={FormRegistroPessoa} />
                     <Route exact path="/listagemUsuarios" component={ListUsuario} />
                     <Route exact path="/login" component={FormLogin} />
+
 
                     <Route exact path="/testeImagem" component={TesteImagem} />
 
