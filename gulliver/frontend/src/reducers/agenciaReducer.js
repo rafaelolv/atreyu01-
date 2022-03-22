@@ -8,6 +8,7 @@ const initialState = {
 function agenciaReducer(state = initialState, action) {
     switch (action.type) {
         case CREATE_AGENCIA:
+            console.log("Chegou CREATE_AGENCIA! reducer ? ------");
             return {
                 ...state,
                 agencias: [...state.agencias, action.payload]
@@ -15,7 +16,6 @@ function agenciaReducer(state = initialState, action) {
             // return [...state, payload];
 
         case LIST_AGENCIA:
-            console.log("Chegou 6! reducer");
             return {
                 ...state,
                 agencias: [...action.payload]
@@ -23,6 +23,8 @@ function agenciaReducer(state = initialState, action) {
             }
 
         case GET_AGENCIA:
+            console.log("Chegou GET_AGENCIA! reducer ? ------ " + action.payload.nome);
+            // Object.values(console.log(action.payload))
             return {
                 ...state,
                 agencia: action.payload

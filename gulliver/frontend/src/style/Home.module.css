@@ -1,0 +1,73 @@
+.barraMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 200px;
+    height: 500px;
+    border: 2px solid black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 4px dimgray;
+    background-color: #DEE2E6;
+}
+
+.areaLogo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 180px;
+    height: 150px;
+    margin-bottom: 20px;
+    border: 2px solid red;
+    background-color: dimgray;
+}
+
+.areaLogo div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: center; */
+    border: 2px solid black;
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+
+}
+
+.areaLogo div img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    object-fit: cover;
+}
+
+.areaLogo span {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    width: 100%;
+    height: 30px;
+}
+
+.navAdm {
+    border: 2px solid red;
+}
+
+.navAdmUl {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: stretch; */
+    /* align-content: flex-start; */
+    /* align-items: flex-start; */
+}
+
+.navAdmUl li {
+    list-style-type: none;
+    border: 2px solid gray;
+}

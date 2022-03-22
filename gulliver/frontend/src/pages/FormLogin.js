@@ -1,89 +1,88 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
+import React, { Fragment, useState } from 'react';
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import usuarioReducer from './../reducers/usuarioReducer';
 import { logarUsuario } from '../actions/usuarioActions';
 import AutoRegisterLoginButton from '../components/header/nav/login/AutoRegisterLoginButton';
-import Home from './Home';
 
-const mapStateToProps = state => {
-    return {
-        dadosUsuarioLogado: state.usuarioReducer.usuario
-    };
-};
 
-class FormLogin extends Component {
+const FormLogin = (props) => {
 
-    constructor(props) {
-        super(props)
+    let history = useHistory();
+    const dispatch = useDispatch();
 
-        this.state = {
-            login: '',
-            senha: '',
-            dadosUsuarioLogado: null
-        };
+    const [login, setUsername] = useState("");
+    const [senha, setPassword] = useState("");
 
-        this.handleRegister = this.handleRegister.bind(this);
-        this.handlerChange = this.handlerChange.bind(this);
-    }
+    const handleLogin = () => {
 
-    handleRegister(){
-        const {login, senha} = this.state;
-        console.log("handlerRegister " + login);
-
-        this.props
-            .logarUsuario(login, senha);
-            
-            this.setState({
-                login: '',
-                senha: '',
+        // const {login, senha} = this.state;
+        dispatch(logarUsuario(login, senha))
+            .then(() => {
+                history.push("/home");
+                // window.location.reload();
+            })
+            .catch((e) => {
+                console.log(e);
             });
 
+        
+
+
+        // this.props
+        //     .logarUsuario(login, senha);
+        
+        // this.setState({
+        //     login: '',
+        //     senha: '',
+        // });
     }
 
-    handlerChange(event) {
-        this.setState({
-            [event.target.id]: event.target.value
-        });
-    }
+    const onChangeLogin = (e) => {
+        const login = e.target.value;
+        setUsername(login);
+    };
+    
+    const onChangePassword = (e) => {
+        const senha = e.target.value;
+        setPassword(senha);
+    };
 
-    render() {
-        const { dadosUsuarioLogado } = this.props;
-        return (
-            <Fragment>
-                {dadosUsuarioLogado == null ? (
+    // const handleChange = (event) => {
+    //     this.setState({
+    //         [event.target.id]: event.target.value
+    //     });
+    // }
+
+    return (
+        <Fragment>
+            <div>
+                <h1>Faça seu login</h1>
+                <form>
                     <div>
-                        <h1>Faça seu login</h1>
-                        <form>
-                            <div>
-                                    <input type="text" id="login" value={this.state.login} onChange={this.handlerChange} placeholder='Login' name="login" />
-                            </div>
-                            <div>
-                                    <input type="text" id="senha" value={this.state.senha} onChange={this.handlerChange} placeholder='Senha' name="senha" />
-                            </div>
-                        </form>
-                        <div>
-                            <span>
-                                Esqueceu sua senha?
-                            </span>
-                        </div>
-                        <button type="submit" onClick={this.handleRegister} >
-                                Login
-                            </button>
-                            <div>
-                                <span>
-                                    Ainda não tem uma conta? Cadastre-se
-                                </span>
-                            </div>
-                            <AutoRegisterLoginButton />
+                        <input type="text" id="login" value={login} onChange={onChangeLogin} placeholder='Login' name="login" />
                     </div>
-                
-                ) : (
-                    <Home usuario={ dadosUsuarioLogado }/>
-                )}
-            </Fragment>
-        );
-    }
+                    <div>
+                        <input type="text" id="senha" value={senha} onChange={onChangePassword} placeholder='Senha' name="senha" />
+                    </div>
+                </form>
+                <div>
+                    <span>
+                        Esqueceu sua senha?
+                    </span>
+                </div>
+                <button type="submit" onClick={handleLogin} >
+                        Login
+                </button>
+                <div>
+                    <span>
+                        Ainda não tem uma conta? Cadastre-se
+                    </span>
+                </div>
+                <AutoRegisterLoginButton />
+            </div>
+        </Fragment>
+    ); 
 }
 
-export default connect(mapStateToProps, { logarUsuario })(FormLogin);
+export default FormLogin;

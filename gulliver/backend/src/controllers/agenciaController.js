@@ -29,7 +29,7 @@ exports.create = (req, res, next) => {
         nome: req.body.agencia.nome,
         cnpj: req.body.agencia.cnpj,
         cor: req.body.agencia.cor,
-        logo: req.body.agencia.logo,
+        imagem: req.body.agencia.imagem,
     });
     console.log("agencia " + req.body.agencia.nome)
     Pessoa.create(pessoa)
@@ -38,12 +38,10 @@ exports.create = (req, res, next) => {
             const agenciaFunc = {
                 pessoa: data,
             }
-            console.log("1 - " + Object.values(data));
+
             Agencia.create(agencia)
                 .then(data => {
-                    console.log("2 --- " + Object.values(data));
                     agenciaFunc.agencia = data;
-                    console.log("3 --- " + Object.values(agenciaFunc));
                     res.send(agenciaFunc);
                 })
                 .catch(err => {

@@ -19,6 +19,7 @@ app.use(express.urlencoded({ limit: '50mb', extended: true })); /* bodyParser.ur
 
 require("../routers/usuarioRoutes")(app); //passando app para a função que esta nesse caminho
 require("../routers/agenciaRoutes")(app);
+require("../routers/pacoteRoutes")(app);
 
 // app.use("/cadastrousuario", UsuarioRoutes);
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const InputImage = ({handlerChangeImage}) => {
 
-   const convertToBase64 = (file) => {
+    const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
             fileReader.readAsDataURL(file);
@@ -15,7 +15,7 @@ const InputImage = ({handlerChangeImage}) => {
         });
     };
 
-  const handlerFileUpload = async (event) => {
+    const handlerFileUpload = async (event) => {
         const file = event.target.files[0];
         const base64 = await convertToBase64(file);
         handlerChangeImage(event, base64);
@@ -24,12 +24,12 @@ const InputImage = ({handlerChangeImage}) => {
     return (
         <div>
             <label htmlFor="image">
-                Adicione uma imagem de exibição
+                Adicione uma imagem
             </label><br/>
             <input 
                 type="file"
                 id="imagem"
-                label="Image"
+                label="imagem"
                 name="imagem"
                 accept=".jpeg, .png, .jpg"
                 onChange={(event) => handlerFileUpload(event)}

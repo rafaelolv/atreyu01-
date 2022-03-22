@@ -1,20 +1,18 @@
 import React from 'react';
+import style from '../../style/Anuncios.module.css';
 
-const Anuncio = () => {
+const Anuncio = ( {pacote} ) => {
     return (
-        <div>
+        <div className={style.anuncioNaoDestaque}>
             <div>
-                Imagem
+                <img src={pacote.imagem} alt="usuarioImg" />
             </div>
             <article>
-                <span>
-                    <h2>Título anúncio</h2>
-                </span>
-                <span>
-                    <p>
-                        Resumo informações anúncio
-                    </p>
-                </span>
+                <h2>{ pacote.destino }</h2>
+                <p>
+                    { pacote.descricao } <br/>
+                    {pacote.data_programada}
+                </p>
             </article>
         </div>
     )

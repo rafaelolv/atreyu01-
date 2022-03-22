@@ -16,7 +16,7 @@ class UsuarioService {
     }
 
     login(data) {
-        console.log("Chegou service aqui 1 login!");
+        console.log("CCCCCCCCChegou service aqui 1 login!!!!!!!");
         return http.post("/usuarios/login", data);
     }
 }

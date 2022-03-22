@@ -1,4 +1,6 @@
 import { CREATE_USUARIO, LIST_USUARIO, GET_USER } from "./actionTypes/usuarioActionTypes";
+import { GET_AGENCIA } from "./actionTypes/agenciaActionTypes";
+import { LIST_PACOTES } from "./actionTypes/pacoteActionTypes";
 import Usuarioservice from "../services/usuarioService";
 
 export const createUsuario = (data) => async (dispatch) => {
@@ -37,21 +39,27 @@ export const retrieveUsuarios = () => async (dispatch) => {
 }
 
 export const logarUsuario = (login, senha) => async (dispatch) => {
-    try{
-        console.log("logarUsuario " + login);
-        const res = await Usuarioservice.login({ login, senha });
-        console.log("---action do usuário logado::::: " + res.data);
+    try {
 
-        // let usuarios = res.data;
-        // usuarios.map(usuario => console.log("Nome: " + usuario.nome +  ": " + usuario.id_usuario))
+        const res = await Usuarioservice.login({ login, senha });
 
         dispatch({
             type: GET_USER,
-            payload: res.data,
-          });
+            payload: res.data.funcionario,
+        });
 
+        dispatch({
+            type: GET_AGENCIA,
+            payload: res.data.agencia,
+        });
+
+        dispatch({
+            type: LIST_PACOTES,
+            payload: res.data.pacote,
+        });
+        return Promise.resolve();
     }catch (err) {
-        console.log(err);
+        return Promise.reject(err);
     }
 }
 

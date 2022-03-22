@@ -48,7 +48,7 @@ class FormRegistroAgencia extends Component {
             pessoa: this.state.pessoa,
             agencia: this.state.agencia,
         };
-        
+        console.log("---SENHA handleSubmit formregistroagencia " + data.pessoa.dadosAcesso.senha)
         this.props.createAgencia(data);
     }
 

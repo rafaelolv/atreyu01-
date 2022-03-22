@@ -1,6 +1,8 @@
 const { json } = require("body-parser");
 const { response } = require("express");
 const Pessoa = require("../models/usuarioModel.js");
+const Agencia = require("../models/agenciaModel.js");
+const Pacote = require("../models/pacoteModel.js");
 const PessoaFactory = require("../models/pessoaFactory/pessoaFactory.js");
 
 exports.create = (req, res, next) => {
@@ -29,26 +31,16 @@ exports.create = (req, res, next) => {
     //     }
     // });
 
-    // const pessoaTeste = {
-    //     nome: req.body.nome,
-    //     sobrenome: req.body.sobrenome,
-    //     dadosAcesso: {
-    //         id_pessoa: null,
-    //         login: req.body.dadosAcesso.login,
-    //         senha: req.body.dadosAcesso.senha
-    //     }
-    // }
     console.log("1 - pessoa do controller " + pessoa.nome + " - " + Object.values(pessoa));
     
     Pessoa.create(pessoa)
         .then(data => {
-            // console.log(Object.values(data));
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Tutorial."
+                    err.message || "Some error occurred while creating the person."
             });
         });
 };
@@ -83,7 +75,14 @@ exports.findAll = (req, res) => {
         // }    
 };
 
-exports.login = (req, res, next) => {
+
+const resultData = {
+    funcionario: null,
+    agencia: null,
+    pacote: null,
+};
+
+exports.login = (req, res, next, data = resultData) => {
     console.log("Chegou aqui login controller " + req.body.login + " - " + req.body.senha)
     if(!req.body.login || !req.body.senha) {
         res.status(400).send({
@@ -93,14 +92,26 @@ exports.login = (req, res, next) => {
     }
     // const user = {req.body.login, req.body.senha};
 
-    const userLogin = new Usuario({
+    const usuarioLogado = null;
+
+    const userLogin = {
         login: req.body.login,
         senha: req.body.senha
-    });
-
+    }
+    
     Pessoa.findByLoginSenha(userLogin)
+        .then(dataFunc => data = {...data, funcionario: dataFunc.funcionario})
+        .then(data => Agencia.findAgenciaByIdFuncionario(data.funcionario.id_funcionario))
+        .then(dataAgencia => data = {...data, agencia: dataAgencia.agencia})
+        
+            // if(data.funcionario.id_funcionario === undefined) {
+            //     throw new Error("Essa pessoa não tem cadastro de funcionário.")
+            // }
+        
+        .then(data => Pacote.findPacotesById(data.agencia.id_agencia))
+        .then(dataPacote => data = {...data, pacote: dataPacote.pacote})
+        // .then(resultData => Object.values(console.log(data)))
         .then(data => {
-            console.log("data do constroller " + data.nome)
             res.send(data);
         })
         .catch(err => {

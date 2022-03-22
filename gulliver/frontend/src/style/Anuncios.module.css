@@ -1,19 +1,68 @@
-.areaAnuncios{
+.areaAnuncios {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     background-color: lightcyan;
+    align-items: center;
     border: 2px solid black ;
     margin-top: 25px;
     margin-bottom: 25px;
-    height: 400px;  
+    /* height: 400px;   */
     /* Se o height nao expandir sozinho, testo com % */
 }
 
-.anunciosDestaque{
+.areaAnunciosDestaque {
+    display: flex;
+    border: 2px solid green;
+    width: 650px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.anuncioDestaque {
     border: 2px solid black;
 }
 
-.anunciosSecundarios{
-    border: 2px solid black;
+.areaAnunciosNaoDestaque {
+    display: flex;
+    border: 2px solid red;
+    width: 1050px;
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
+
+.anuncioNaoDestaque {
+    border: 2px solid orchid;
+    width: 300px;
+    height: 350px;
+    /* margin-left: 5px; */
+    margin-right: 5px;
+}
+
+.anuncioNaoDestaque div {
+    border: 2px solid black;
+    height: 200px;
+}
+
+.anuncioNaoDestaque div img {
+    width: 100%;
+    height: 200px;
+    /* max-height: 50%; */
+}
+
+.anuncioNaoDestaque article {
+    border: 2px solid black;
+    height: 150px;
+}
+
+.anuncioNaoDestaque h2 {
+    border: 2px solid red;
+}
+
+.anuncioNaoDestaque p {
+    border: 2px solid red;
+}
+
+/* .anuncioNaoDestaque article span:nth-child(2) {
+    border: 2px solid palevioletred;
+} */

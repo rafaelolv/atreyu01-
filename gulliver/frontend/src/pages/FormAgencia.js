@@ -23,7 +23,7 @@ class FormAgencia extends Component {
            nome: '',
            cnpj: '',
            cor: '',
-           logo: '',
+           imagem: '',  //imagem do logo da agencia
            id_funcionario: null,
         };
 
@@ -45,7 +45,7 @@ class FormAgencia extends Component {
             nome: '',
             cnpj: '',
             cor: '',
-            logo: '',
+            imagem: '',
         });
     }  
 
@@ -55,9 +55,9 @@ class FormAgencia extends Component {
         });
     }
 
-    handlerChangeImage(event, image) {
+    handlerChangeImage(event, imagem) {
         this.setState({
-            [event.target.id]: image
+            [event.target.id]: imagem
         });
 
         this.props.callBackStepAgencia(this.state);

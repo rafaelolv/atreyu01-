@@ -9,6 +9,7 @@ function usuarioReducer(state = initialState, action) {
 
     switch (action.type) {
         case CREATE_USUARIO:
+            console.log("Chegou aqui CREATE_USUARIO ? -----")
             return {
                 ...state,
                 usuarios: [...state.usuarios, action.payload]
@@ -24,6 +25,8 @@ function usuarioReducer(state = initialState, action) {
             }
 
         case GET_USER:
+            console.log("Chegou aqui GET_USER reducer ? ------ ")
+            // Object.values(console.log(action.payload))
             return {
                 ...state,
                 usuario: action.payload

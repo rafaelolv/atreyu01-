@@ -3,12 +3,12 @@ import Anuncio from './Anuncio';
 
 import style from '../../style/Anuncios.module.css';
 
-const AnunciosDestaques = () => {
+const AreaAnunciosDestaque = () => {
     return(
-        <section className={style.anunciosDestaque}> 
+        <section className={style.areaAnunciosDestaque}> 
             <Anuncio />
         </section>
     );
 };
 
-export default AnunciosDestaques;
+export default AreaAnunciosDestaque;

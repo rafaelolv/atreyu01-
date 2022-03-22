@@ -14,7 +14,12 @@ class InputsDadosPessoa extends Component {
             nome: '',
             sobrenome: '',
             dadosRegistroFuncionario: {},
-            dadosAcesso: {},
+            dadosAcesso: {
+                // id_dados_acesso: null,
+                // id_pessoa: null,
+                // login: '',
+                // senha: '',
+            },
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,9 +39,10 @@ class InputsDadosPessoa extends Component {
         });
     }
 
-    handleChangeDadosAcesso(data) {
+    handleChangeDadosAcesso(event) {
         this.setState({
-            dadosAcesso: data
+            // ...this.state.dadosAcesso,
+            dadosAcesso: {...this.state.dadosAcesso, [event.target.id]: event.target.value }
         });
         
         this.props.handleChangeChild(this.state);
@@ -54,7 +60,7 @@ class InputsDadosPessoa extends Component {
                     <input type="text" id="sobrenome" value={this.state.sobrenome} onChange={this.handleChange} placeholder='Sobrenome' name="sobrenome" />
                 </div>
                 <FormRegistroFuncionario handleChangeChild={this.handleChangeRegistroFuncionario}/>
-                <FormDadosAcesso handleChangeChild={this.handleChangeDadosAcesso} />
+                <FormDadosAcesso handleChangeChild={this.handleChangeDadosAcesso} dadosAcesso={ this.state.dadosAcesso } />
             </Fragment>
         )
     }

@@ -10,28 +10,33 @@ class FormDadosAcesso extends Component {
             login: '',
             senha: '',
         };
-        this.handleChange = this.handleChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({
-            [event.target.id]: event.target.value
-        })
-        if(event.target.id === "senha"){
-            this.props.handleChangeChild(this.state);
-        }
-    }
+    // handleChange(event) {
+    //     this.setState({
+    //         [event.target.id]: event.target.value
+    //     })
+
+    //     this.props.handleChangeChild(this.state, event);
+
+    //     if(event.target.id === "senha"){
+    //         console.log("senha formdadosAcesso " + this.state.senha);
+    //         this.props.handleChangeChild(this.state);
+    //         console.log("senha formdadosAcesso--2--" + this.state.senha);
+    //     }
+    // }
 
     render() {
         return(
             <div>
                 <div>
                     <label>Login: </label>
-                    <input type="text" id="login" value={this.state.login} onChange={this.handleChange} placeholder='Login' name="login" />
+                    <input type="text" id="login" value={this.props.dadosAcesso.login} onChange={this.props.handleChangeChild} placeholder='Login' name="login" />
                 </div>
                 <div>
                     <label>Senha: </label>
-                    <input type="text" id="senha" value={this.state.senha} onChange={this.handleChange} placeholder='Senha' name="senha" />
+                    <input type="text" id="senha" value={this.props.dadosAcesso.senha} onChange={this.props.handleChangeChild} placeholder='Senha' name="senha" />
                 </div>
             </div>         
         )

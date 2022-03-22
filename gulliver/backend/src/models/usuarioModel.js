@@ -9,9 +9,6 @@ const Pessoa = function(pessoa) {
     this.dadosRegistroFuncionario = pessoa.dadosRegistroFuncionario;
 };
 
-// const queryPessoa = 'INSERT INTO pessoa SET ?';
-// const queryDadosAcesso = 'INSERT INTO dados_acesso SET ?';
-// const queryRegistroFuncionario = 'INSERT INTO funcionario SET ?';
 
 Pessoa.create = (newPessoa) => {
 
@@ -75,16 +72,43 @@ Pessoa.findAll = () => {
 Pessoa.findByLoginSenha = (userLogin) => {
     // posso tentar fazer aqui um select aninhado, o primeiro buscando o id atraves do login e senha passados, se encontrar faz um select trazendo todos os dados
     // necessarios para colocar na sua página. 
-    return new Promise((resolve, reject) => {
-        const teste = "timao";
+    return new Promise( async (resolve, reject) => {
         try {
-            console.log("Ativando a consulta de login!!! " + userLogin.login + " - " + userLogin.senha);
-            sql.query(`SELECT * FROM usuario WHERE login LIKE "${userLogin.login}" AND senha LIKE "${userLogin.senha}"`, (err, res) => {
-                resolve(res[0]);
-            })
+            
+            const queryLoginPessoa = 'select * from dados_acesso where (login = ? AND senha = ?)';
+            
+            const {login, senha} = userLogin;
+            const resultPessoa = await executeQuery(sql, queryLoginPessoa, [login, senha]);
+            
+            const data = {pessoa: {...resultPessoa[0]}, funcionario: null};
+            
+            const queryFuncionario = 'select * from funcionario where id_pessoa = ?';
+            const resultIdFuncionario = await executeQuery(sql, queryFuncionario, data.pessoa.id_pessoa);
+            // Object.values(console.log(resultIdFuncionario));
+            console.log("----resultIdFuncionario model " + resultIdFuncionario[0].id_funcionario);
+            
+
+            data.funcionario = {id_funcionario: resultIdFuncionario[0].id_funcionario};
+
+            console.log("data - findByLoginSenha model " + data.funcionario.id_funcionario)
+            // Object.values(console.log(data));
+            resolve(data);
+
         } catch (err) {
             reject(err);
         }
+
+
+
+        // const teste = "timao";
+        // try {
+        //     console.log("Ativando a consulta de login!!! " + userLogin.login + " - " + userLogin.senha);
+        //     sql.query(`SELECT * FROM usuario WHERE login LIKE "${userLogin.login}" AND senha LIKE "${userLogin.senha}"`, (err, res) => {
+        //         resolve(res[0]);
+        //     })
+        // } catch (err) {
+        //     reject(err);
+        // }
     })
 }
 

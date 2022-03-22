@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 
 import AreaAnuncios from '../components/main/AreaAnuncios';
 
-const Main = () => {
-    return (
-        <AreaAnuncios />
-    );
+import { retrieveAllPacotes } from '../actions/pacoteActions';
+
+const mapDispatchToProps = dispatch => {
+    return {
+        retrieveAllPacotes: () => dispatch(retrieveAllPacotes())
+    }
+} 
+
+
+class Main extends Component {
+
+    componentDidMount() {
+        this.props.retrieveAllPacotes();
+    }
+
+    render() {
+        return (
+            <AreaAnuncios />
+        );
+    }
 };
 
-export default Main;
+export default connect(null, mapDispatchToProps) ( Main );

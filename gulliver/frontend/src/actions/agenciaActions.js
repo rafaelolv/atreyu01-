@@ -4,10 +4,12 @@ import AgenciaService from "../services/agenciaService";
 
 export const createAgencia = (newAgencia) => async (dispatch) => {
     try {
+        console.log("teste newAgencia ")
+        // Object.values(console.log(newAgencia));
         const res = await AgenciaService.create(newAgencia);
 
-        console.log("action creacteAgencia Chegou aqui! " + res.data.agencia.nome + res.data.agencia.cnpj + res.data.agencia.id_agencia + " -- " + Object.values(res.data));
-        console.log("action creacteAgencia Chegou aqui! " + res.data.pessoa.nome  + res.data.pessoa.sobrenome + res.data.pessoa.id_pessoa);
+        console.log("action creacteAgencia Chegou aqui agencia! " + res.data.agencia.nome + res.data.agencia.cnpj + res.data.agencia.id_agencia + " -- " + Object.values(res.data));
+        console.log("action creacteAgencia Chegou aqui pessoa! " + res.data.pessoa.nome  + res.data.pessoa.sobrenome + res.data.pessoa.id_pessoa + " " + res.data.pessoa.dadosAcesso.senha);
 
         dispatch({
             type: CREATE_USUARIO,
